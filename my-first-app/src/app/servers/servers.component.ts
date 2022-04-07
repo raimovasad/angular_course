@@ -9,7 +9,11 @@ export class ServersComponent implements OnInit {
   allowNewServer = false;
   serverCreationStatus = "No server was created!";
   serverName="Test server";
-  username = '';
+  serverCreated = false;
+  servers=['Testserver', 'Testserver 2'];
+  messages = []
+  displayPassword = false;
+
   constructor() {
     setTimeout(() => {
       this.allowNewServer = true;
@@ -21,18 +25,17 @@ export class ServersComponent implements OnInit {
 
 
   onCreateServer() {
+    this.serverCreated = true;
+    this.servers.push(this.serverName);
     this.serverCreationStatus = "Server was created! Name is " + this.serverName;
   }
 
-  onUpdateServer(event:Event){
-    this.serverName = (<HTMLInputElement>event.target).value;
+  togglePassword(){
+    this.displayPassword = !this.displayPassword;
+    this.messages.push( new Date().getTime())
   }
 
-  checkUser(){
-    return !!this.username ? false : true;
-  }
 
-  resetUser(){
-    this.username = '';
-  }
+
+
 }

@@ -1,11 +1,14 @@
 <!-- <label for="server">Server Name</label>
-<input type="text" class="form-control" (input)="onUpdateServer($event)" id="server">
 <input type="text" class="form-control" [(ngModel)]="serverName" id="server">
 <p>{{serverName}}</p>
 <button [disabled]="!allowNewServer" class="btn btn-primary" (click)="onCreateServer()">Add Server</button>
 <p>{{serverCreationStatus}}</p>
-<app-server></app-server> -->
+<p *ngIf="serverCreated">Server was created, server name is {{serverName}}</p>
 
-<input type="text"  class="form-control" [(ngModel)]="username">
-<p>{{username}}</p>
-<button class="btn btn-primary" [disabled]="checkUser()" (click)="resetUser()">Reset username</button>
+<app-server *ngFor="let server of servers" ></app-server>
+ -->
+
+ <button class="btn btn-primary" (click)="togglePassword()">Display Details</button>
+<p *ngIf="displayPassword">Secret Password = Luna</p>
+<hr>
+<p *ngFor="let msg of messages;let i = index"  [ngClass]="{custom: i >= 4 ? true : false}"> {{msg | date:'hh:mm:ss'}}</p>
