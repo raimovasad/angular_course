@@ -6,29 +6,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  serverElements = [{type: 'server', name: 'Testserver', content: 'Just a test!'}];
+  numbers=[1,2,3,4,5];
+  oddNumbers=[1,3,5];
+  evenNumbers=[2,4];
+  value=5;
+  onlyOdd = false;
 
-  onServerAdded(elem: {serverName: string, serverContent: string}) {
-    this.serverElements.push({
-      type: 'server',
-      name: elem.serverName,
-      content: elem.serverContent
-    });
-  }
-
-  onBlueprintAdded(elem: {serverName: string, serverContent: string}) {
-    this.serverElements.push({
-      type: 'blueprint',
-      name: elem.serverName,
-      content: elem.serverContent
-    });
-  }
-
-  onChanges(){
-    this.serverElements[0].name = 'Changed!';
-  }
-
-  onDEstroy(){
-    this.serverElements.splice(0, 1);
-  }
 }
