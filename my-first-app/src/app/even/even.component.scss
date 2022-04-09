@@ -1,0 +1,11 @@
+.even{
+  background: rgba(219, 3, 226,.7);
+  max-width: 300px;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  & p {
+    margin: 0;
+  }
+}

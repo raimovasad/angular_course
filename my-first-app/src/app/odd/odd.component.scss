@@ -1,0 +1,11 @@
+.odd{
+  background: rgba(226, 185, 3, 0.7);
+  max-width: 300px;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  & p {
+    margin: 0;
+  }
+}
