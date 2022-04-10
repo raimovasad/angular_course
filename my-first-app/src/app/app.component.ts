@@ -1,15 +1,34 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { CounterService } from './services/counter.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
+  providers: []
 })
-export class AppComponent {
-  numbers=[1,2,3,4,5];
-  oddNumbers=[1,3,5];
-  evenNumbers=[2,4];
-  value=5;
-  onlyOdd = false;
+export class AppComponent implements OnInit {
+  counter:{active:number, inactive:number};
+
+  constructor(private counterService:CounterService){
+  }
+
+  ngOnInit(): void {
+    this.counter = {
+      active: this.counterService.getActiveCounter(),
+      inactive: this.counterService.getInactiveCounter()
+    };
+  }
+
+  getCounter(){
+    this.counter = {
+      active: this.counterService.getActiveCounter(),
+      inactive: this.counterService.getInactiveCounter()
+    };
+  }
+
+
+
+
 
 }
