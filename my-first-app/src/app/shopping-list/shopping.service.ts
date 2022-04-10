@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { Ingridient } from '../shared/ingridient.model';
 
 
@@ -6,6 +6,7 @@ import { Ingridient } from '../shared/ingridient.model';
   providedIn: 'root'
 })
 export class ShoppingService {
+  ingridientChange = new EventEmitter<Ingridient[]>();
   private ingridients:Ingridient[] = [
     new Ingridient('Apples', 5),
     new Ingridient('Grapes', 12),
@@ -19,6 +20,11 @@ export class ShoppingService {
 
   addIngridient(ingridient:Ingridient){
     this.ingridients.push(ingridient);
-    console.log(this.ingridients);
+    this.ingridientChange.emit(this.ingridients.slice());
+  }
+
+  addIngridients(ingridients:Ingridient[]){
+    this.ingridients = [...this.ingridients,...ingridients]
+    this.ingridientChange.emit(this.ingridients.slice());
   }
 }

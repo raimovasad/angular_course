@@ -6,7 +6,6 @@ import { ShoppingService } from './shopping.service';
   selector: 'app-shopping-list',
   templateUrl: './shopping-list.component.html',
   styleUrls: ['./shopping-list.component.scss'],
-  providers: [ShoppingService]
 })
 export class ShoppingListComponent implements OnInit {
   ingridients:Ingridient[] = [];
@@ -14,7 +13,11 @@ export class ShoppingListComponent implements OnInit {
 
   ngOnInit(): void {
     this.ingridients = this.shoppingService.getIngridients();
+    this.shoppingService.ingridientChange.subscribe((ingridients:Ingridient[]) => {
+      this.ingridients = ingridients;
+    })
   }
+
 
 
 }
