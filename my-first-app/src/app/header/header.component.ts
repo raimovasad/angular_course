@@ -7,10 +7,7 @@ import { Component, EventEmitter, Output } from "@angular/core";
 })
 export class HeaderComponent {
 
-  @Output('routePage') pageSelected = new EventEmitter<string>();
 
-  onSelect(url:string) {
-    this.pageSelected.emit(url);
-  }
+
 
 }

@@ -10,6 +10,7 @@ export class RecipeService {
 
  private recipes:Recipe[] = [
     new Recipe(
+       1,
       'Italian Maccoroni',
       'This is simply a test',
       'https://i.pinimg.com/originals/b3/23/08/b3230875aedd5cdadcee0e3dfa433a33.jpg',
@@ -19,6 +20,7 @@ export class RecipeService {
       ]
     ),
     new Recipe(
+       2,
       'New Swedish Meatballs',
       'This is simply a test',
       'https://i.pinimg.com/originals/09/6f/00/096f00a0739815e14a1be086e811b0c9.jpg',
@@ -33,6 +35,11 @@ export class RecipeService {
 
   getRecipes(){
     return this.recipes.slice();
+  }
+
+  getRecipe(id:number){
+    const recipe = this.recipes.find(c=> c.id === id);
+    return recipe;
   }
 
 }
