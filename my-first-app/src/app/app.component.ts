@@ -1,24 +1,25 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
-import { UserService } from './user.service';
+import { Component, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit, OnDestroy {
-  userActivated = false;
-  private subscription: Subscription;
-  constructor(private userService:UserService) {}
-
-  ngOnInit() {
-    this.subscription =this.userService.activatedEmitter.subscribe(didActivate=>{
-      this.userActivated = didActivate;
-    })
+export class AppComponent {
+@ViewChild('f') signupForm:NgForm;
+  defaultQuestion = 'pet';
+  gender = ['male', 'female']
+  answer:string;
+  suggestUserName() {
+    const suggestedName = 'Superuser';
   }
 
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+  // onSubmit(form: NgForm) {
+  //   console.log(form);
+  // }
+
+  onSubmit(){
+    console.log(this.signupForm);
   }
 }
