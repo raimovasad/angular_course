@@ -7,38 +7,25 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-@ViewChild('f') signupForm:NgForm;
-  defaultQuestion = 'pet';
-  gender = ['male', 'female']
-  answer:string;
-  user = {
-    username: '',
-    email: '',
-    secretQuestion: '',
-    answer: '',
-    gender:''
-  }
-  submitted = false;
-  suggestUserName() {
-    const suggestedName = 'Superuser';
-    this.signupForm.form.patchValue({
-      userData:{
-        username: 'ASadbek'
-      }
-    })
-  }
 
-  // onSubmit(form: NgForm) {
-  //   console.log(form);
-  // }
+@ViewChild('f') signupForm:NgForm;
+subscriptions = ['Basic','Advanced','Pro'];
+ deafaultSubscription = 'Advanced';
+ submitted = false;
+ user={
+    email:'',
+    subscription:'',
+    password:''
+ }
+
+
+
 
   onSubmit(){
     this.submitted = true;
-    this.user.username = this.signupForm.value.userData.username;
+    console.log(this.signupForm);
     this.user.email = this.signupForm.value.userData.email;
-    this.user.secretQuestion = this.signupForm.value.secret;
-    this.user.answer = this.signupForm.value.questionAnswer;
-    this.user.gender = this.signupForm.value.gender;
-    this.signupForm.reset()
+    this.user.password = this.signupForm.value.userData.password;
+    this.user.subscription = this.signupForm.value.subscription;
   }
 }

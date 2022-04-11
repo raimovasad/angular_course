@@ -1,52 +1,36 @@
 <div class="container">
   <div class="row">
     <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
-      <form (ngSubmit)="onSubmit()" #f="ngForm">
+      <form (ngSubmit)="onSubmit()"   #f="ngForm" >
         <div id="user-data" ngModelGroup="userData" #userData="ngModelGroup">
           <div class="form-group">
-            <label for="username">Username</label>
-            <input type="text" id="username" class="form-control" ngModel name="username" required>
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" #password="ngModel" ngModel class="form-control" required>
+            <span style="color: red;" *ngIf="password.invalid && password.touched ?? !password.value">Please enter a valid password</span>
           </div>
-          <button class="btn btn-default" (click)="suggestUserName()" type="button">Suggest an Username</button>
           <div class="form-group">
             <label for="email">Mail</label>
-            <input type="email" id="email" class="form-control"  ngModel name="email" required email #email="ngModel">
-            <span class="hepl-block" *ngIf="!email.valid && email.touched">Please enter a valid email!</span>
+            <input type="email" id="email" name="email"  ngModel #email="ngModel" class="form-control" required email>
+            <span style="color: red;" *ngIf="email.invalid && email.touched">Please enter a valid email</span>
           </div>
-
         </div>
-        <p *ngIf="!userData.valid && userData.touched">User data is invalid!</p>
+        <p *ngIf="!userData.valid">User data is not valid!</p>
         <div class="form-group">
-          <label for="secret">Secret Questions</label>
-          <select id="secret" class="form-control"  [ngModel]="defaultQuestion" name="secret" required>
-            <option value="pet">Your first Pet?</option>
-            <option value="teacher">Your first teacher?</option>
+          <label for="secret">Subscription</label>
+          <select id="secret" class="form-control" name="subscription" [ngModel]="deafaultSubscription">
+            <option *ngFor="let s of subscriptions" value="{{s}}">{{s}}</option>
           </select>
         </div>
-        <div class="form-group">
-          <textarea name="questionAnswer"  rows="3" [(ngModel)]="answer"></textarea>
-        </div>
-        <p>Your reply: {{answer}} </p>
-        <div class="radio" *ngFor="let g of gender">
-          <label for="{{g}}">
-            <input type="radio" name="gender" [id]="g" ngModel [value]="g">
-            {{g}}
-          </label>
-        </div>
-        <button class="btn btn-primary" type="submit" [disabled]="!f.valid">Submit</button>
+        <button class="btn btn-primary" [disabled]="!f.valid" type="submit" >Submit</button>
       </form>
     </div>
   </div>
-  <hr>
 
+  <hr>
   <div class="row" *ngIf="submitted">
-    <div class="col-xs-12">
-      <h3>Your data</h3>
-      <p>Username: {{user.username}}</p>
-      <p>Mail: {{user.email}}</p>
-      <p>SecretQuestion: {{user.SecretQuestion}}</p>
-      <p>Answer: {{user.answer}}</p>
-      <p>Gender: {{user.gender}}</p>
-    </div>
+    <h3>Your data:</h3>
+      <p>Email: {{user.email}}</p>
+      <p>Password: {{user.password}}</p>
+      <p>subscription: {{user.subscription}}</p>
   </div>
 </div>
