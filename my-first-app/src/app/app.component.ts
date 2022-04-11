@@ -1,34 +1,24 @@
-import { Component, OnInit } from '@angular/core';
-import { CounterService } from './services/counter.service';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { UserService } from './user.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
-  providers: []
+  styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit {
-  counter:{active:number, inactive:number};
+export class AppComponent implements OnInit, OnDestroy {
+  userActivated = false;
+  private subscription: Subscription;
+  constructor(private userService:UserService) {}
 
-  constructor(private counterService:CounterService){
+  ngOnInit() {
+    this.subscription =this.userService.activatedEmitter.subscribe(didActivate=>{
+      this.userActivated = didActivate;
+    })
   }
 
-  ngOnInit(): void {
-    this.counter = {
-      active: this.counterService.getActiveCounter(),
-      inactive: this.counterService.getInactiveCounter()
-    };
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
-
-  getCounter(){
-    this.counter = {
-      active: this.counterService.getActiveCounter(),
-      inactive: this.counterService.getInactiveCounter()
-    };
-  }
-
-
-
-
-
 }
