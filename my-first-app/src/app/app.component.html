@@ -1,36 +1,43 @@
+
 <div class="container">
   <div class="row">
     <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
-      <form (ngSubmit)="onSubmit()"   #f="ngForm" >
-        <div id="user-data" ngModelGroup="userData" #userData="ngModelGroup">
+      <form [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
+        <div formGroupName="userData">
           <div class="form-group">
-            <label for="password">Password</label>
-            <input type="password" id="password" name="password" #password="ngModel" ngModel class="form-control" required>
-            <span style="color: red;" *ngIf="password.invalid && password.touched ?? !password.value">Please enter a valid password</span>
+            <label for="username">Username</label>
+            <input
+              type="text"
+              id="username"
+              class="form-control" formControlName="username">
+              <span *ngIf="!signUpForm.get('userData.username').valid && signUpForm.get('userData.username').touched" class="help-block">Please enter correct username!</span>
           </div>
           <div class="form-group">
-            <label for="email">Mail</label>
-            <input type="email" id="email" name="email"  ngModel #email="ngModel" class="form-control" required email>
-            <span style="color: red;" *ngIf="email.invalid && email.touched">Please enter a valid email</span>
+            <label for="email">email</label>
+            <input
+              type="text"
+              id="email"
+              class="form-control" formControlName="email">
+              <span *ngIf="!signUpForm.get('userData.email').valid && signUpForm.get('userData.email').touched" class="help-block">Please enter correct email!</span>
           </div>
         </div>
-        <p *ngIf="!userData.valid">User data is not valid!</p>
-        <div class="form-group">
-          <label for="secret">Subscription</label>
-          <select id="secret" class="form-control" name="subscription" [ngModel]="deafaultSubscription">
-            <option *ngFor="let s of subscriptions" value="{{s}}">{{s}}</option>
-          </select>
+        <div class="radio" *ngFor="let gender of genders">
+          <label>
+            <input
+              type="radio"
+              [value]="gender" formControlName="gender">{{ gender }}
+          </label>
         </div>
-        <button class="btn btn-primary" [disabled]="!f.valid" type="submit" >Submit</button>
+        <div formArrayName="hobbies">
+          <h4>Your hobbies</h4>
+          <button class="btn btn-primary" type="button" (click)="onAddHobby()">Add hobby</button>
+          <div class="form-group">
+            <input type="text">
+          </div>
+        </div>
+        <span *ngIf="!signUpForm.valid && signUpForm.touched" class="help-block">form is invalid!</span>
+        <button class="btn btn-primary" type="submit">Submit</button>
       </form>
     </div>
-  </div>
-
-  <hr>
-  <div class="row" *ngIf="submitted">
-    <h3>Your data:</h3>
-      <p>Email: {{user.email}}</p>
-      <p>Password: {{user.password}}</p>
-      <p>subscription: {{user.subscription}}</p>
   </div>
 </div>
