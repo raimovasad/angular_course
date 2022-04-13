@@ -2,10 +2,29 @@
 <div class="container">
   <div class="row">
     <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
-      <label for="">Project status</label>
-      <select name="Project Status" id="">
-        <option value="">Asadbek</option>
-      </select>
+      <form [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" name="name" id="name" class="form-control" formControlName="name">
+          <span *ngIf="!signUpForm.get('name').valid && signUpForm.get('name').touched">
+            <span class="help-block" *ngIf="signUpForm.get('name').errors['nameIsForbidden']">This name is not acceptable!</span>
+            <span class="help-block" *ngIf="signUpForm.get('name').errors['required']">Please enter name!</span>
+          </span>
+        </div>
+        <div class="form-group">
+         <label for="mail">Email</label>
+         <input type="email" name="email" id="mail" class="form-control"  formControlName="email">
+        </div>
+        <div class="form-group">
+           <label for="status">Project status</label>
+           <select name="status" id="status" class="form-control" formControlName="status">
+             <option *ngFor="let status of projectStatus" value="{{status}}">{{status}}</option>
+           </select>
+        </div>
+
+        <button class="btn btn-primary" type="submit">Submit</button>
+      </form>
     </div>
   </div>
 </div>
+
