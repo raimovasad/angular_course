@@ -28,6 +28,12 @@ export class RecipeDetailComponent implements OnInit {
     this.shoppingService.addIngridients(this.recipe.ingridients);
   }
 
+  onDeleteRecipe(){
+    this.recipeService.deleteRecipe(this.recipe.id)
+    console.log(this.recipe.id);
+    this.router.navigate(['../'], {relativeTo: this.route})
+  }
+
   onEditRecipe(){
     this.router.navigate(['edit'], {relativeTo:this.route, queryParamsHandling: 'preserve'})
   }
